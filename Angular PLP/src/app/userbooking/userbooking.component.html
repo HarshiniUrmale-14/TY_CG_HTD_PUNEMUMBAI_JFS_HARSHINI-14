@@ -1,0 +1,46 @@
+<div class="col-md-5 offset-4 mt-3">
+    <form #bookHotel="ngForm" (ngSubmit)="submitForm(bookHotel)">
+        <div class="card">
+            <h4 style="color:red;" *ngIf='update'>{{update.description}}</h4>
+            <div class="card-header bg-dark text-light">
+                <h4>BOOKING DETAILS</h4>
+            </div>
+            <div class="card-body">
+                    <input type="hidden" name="hotelId" class="form-control " #hotelId="ngModel"
+                        [(ngModel)]="hotelService.selectedRoom.hotelId" required>
+                <div class="form-group">
+                    <label for="hotelName">HOTEL NAME</label>
+                    <input type="text" name="hotelName" class="form-control " #hotelName="ngModel"
+                        [(ngModel)]="hotelService.selectedRoom.hotelName" required pattern="(?=.*[a-zA-Z]).{5,20}">
+                    <div *ngIf='hotelName.touched && hotelName.invalid'>
+                        <p class="alert alert-danger" *ngIf='hotelName.errors.required'> field
+                            is
+                            mandatory</p>
+                        <p class="alert alert-danger" *ngIf='hotelName.errors.pattern'> only
+                            minlength 5 and maxlength 20 character only</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roomId">ROOM ID</label>
+                    <input type="number" name="roomId" class="form-control " #bookId="ngModel"
+                        [(ngModel)]="hotelService.selectedRoom.roomId" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkinDate">CHECK IN DATE</label>
+                    <input type="date" name="checkinDate" class="form-control " #checkinDate="ngModel" ngModel
+                        [min]="todaysDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkoutDate">CHECK OUT DATE</label>
+                    <input type="date" name="checkoutDate" class="form-control " #checkoutDate="ngModel" ngModel
+                        [min]="checkinDate.value" required>
+                </div>
+            </div>
+            <div class="card-footer bg-light ">
+                <button class="btn btn-outline-dark float-left" type='reset'>RESET</button>
+                <button class="btn btn-outline-primary float-right "  [disabled]='bookHotel.invalid'
+                    type='submit'>SUBMIT</button>
+            </div>
+        </div>
+    </form>
+</div>

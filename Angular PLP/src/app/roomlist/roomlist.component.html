@@ -1,0 +1,137 @@
+<h4 style="color:red;" *ngIf="delete">{{delete.description}}</h4>
+<div class="container card card-body mt-2 ">
+    <table class="table table-bordered table-hover ">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>HOTEL ID</th>
+                <th>HOTEL NAME</th>
+                <th>ROOM ID</th>
+                <th>ROOM TYPE</th>
+                <th>ROOM CAPACITY</th>
+                <th>ROOM STATUS</th>
+                <th>ROOM RENT</th>
+                <th>ROOM IMAGE</th>
+                <th>UPDATE </th>
+                <th>DELETE </th>
+            </tr>
+        </thead>
+        <tbody class="text-dark">
+            <tr *ngFor='let roomList of roomArray'>
+                <td>{{roomList.hotelId}}</td>
+                <td>{{roomList.hotelName}}</td>
+                <td>{{roomList.roomId}}</td>
+                <td>{{roomList.roomType}}</td>
+                <td>{{roomList.roomCapacity}}</td>
+                <td>{{roomList.roomStatus}}</td>
+                <td>{{roomList.roomRent}}</td>
+                <td><img [src]="roomList.imageUrl" class="img-fluid"></td>
+                <td><button type="button" class="btn btn-outline-dark" (click)='selectRoom(roomList)'
+                        data-toggle="modal" data-target="#exampleModal1">UPDATE </button>
+                    <div class="modal fade text-dark" id="exampleModal1" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabe1l" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="card-header bg-dark text-white ">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">UPDATE ROOM</h5>
+                                        <button type="button" class="close" data-dismiss="modal" (click)="getRoomList()"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modal-body">
+                                    <form #updateRoom="ngForm" (ngSubmit)="updateForm(updateRoom)">
+                                        <h4 style="color:green;" *ngIf="update">{{update.description}}</h4>
+                                        <label for="roomId"></label>
+                                        <input type="hidden" name="roomId" #hotelId="ngModel"
+                                            [(ngModel)]="selectedRoom.roomId">
+                                        <label for="hotelId"></label>
+                                        <input type="hidden" name="hotelId" #hotelId='ngModel'
+                                            [(ngModel)]="selectedRoom.hotelId">
+                                        <label for="hotelName"></label>
+                                        <input type="hidden" name="hotelName" #hotelName='ngModel'
+                                            [(ngModel)]="selectedRoom.hotelName">
+                                        <div>
+                                            <label for="roomType">ROOM TYPE</label>
+                                            <select class="form-control" name="roomType" #roomType='ngModel'
+                                                [(ngModel)]="selectedRoom.roomType" required id="roomType">
+                                                <option disabled>select</option>
+                                                <option>NON AC CLASSIC (2x)</option>
+                                                <option>NON AC CLASSIC (1x)</option>
+                                                <option>AC CLASSIC (2x)</option>
+                                                <option>AC CLASSIC (1x)</option>
+                                            </select>
+                                            <div *ngIf='roomType.touched && roomType.invalid'>
+                                                <p class="alert alert-danger" *ngIf='roomType.errors.required'>
+                                                    This field is mandatory</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="roomCapacity">ROOM CAPACITY</label>
+                                            <select class="form-control" name="roomCapacity" #roomCapacity='ngModel'
+                                                [(ngModel)]="selectedRoom.roomCapacity" required id="roomCapacity">
+                                                <option disabled>select</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                            </select>
+                                            <div *ngIf='roomCapacity.touched && roomCapacity.invalid'>
+                                                <p class="alert alert-danger" *ngIf='roomCapacity.errors.required'> This
+                                                    field is mandatory</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label for="roomStatus">ROOM STATUS</label>
+                                            <select class="form-control" name="roomStatus" #roomStatus='ngModel'
+                                                [(ngModel)]="selectedRoom.roomStatus" required id="roomStatus">
+                                                <option disabled>select</option>
+                                                <option>AVAILABLE</option>
+                                                <option>NOT AVAILABLE</option>
+                                            </select>
+                                            <div *ngIf='roomStatus.touched && roomStatus.invalid'>
+                                                <p class="alert alert-danger" *ngIf='roomStatus.errors.required'> This
+                                                    field is mandatory</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="roomRent">ROOM RENT</label>
+                                            <input type="text" name="roomRent" #roomRent='ngModel'
+                                                [(ngModel)]="selectedRoom.roomRent" required pattern="^\d{3,4}$"
+                                                class="form-control">
+                                            <div *ngIf='roomRent.touched && roomRent.invalid'>
+                                                <p class="alert alert-danger" *ngIf='roomRent.errors.required'>This
+                                                    field is mandatory</p>
+                                                <p class="alert alert-danger" *ngIf='roomRent.errors.pattern'>
+                                                    Enter 3 or 4 digits only</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="imageUrl">ROOM IMAGE</label>
+                                            <input type="url" name="imageUrl" #imageUrl='ngModel'
+                                                [(ngModel)]="selectedRoom.imageUrl" required class="form-control"
+                                                pattern="(?=.*[a-zA-Z]).(?=.*[a-zA-Z0-9]).{10,}">
+                                            <div *ngIf='imageUrl.touched && imageUrl.invalid'>
+                                                <p class="alert alert-danger" *ngIf='imageUrl.errors.required'>This
+                                                    field
+                                                    is mandatory</p>
+                                                <p class="alert alert-danger" *ngIf='imageUrl.errors.pattern'>
+                                                    It requires atleast 10 characters,it accept digit also </p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer bg-light float-right">
+                                            <button class="btn btn-outline-dark " type='reset'>RESET</button>
+                                            <button class="btn btn-outline-primary " type='submit'
+                                                [disabled]='updateRoom.invalid'>SUBMIT</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td><button type="button" class="btn btn-outline-danger" (click)="deleteRoom(roomList)">DELETE</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

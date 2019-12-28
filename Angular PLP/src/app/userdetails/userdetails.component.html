@@ -1,0 +1,26 @@
+<div class="container card card-body mt-4 ">
+    <table class="table table-bordered table-hover ">
+        <thead class="bg-dark text-white">
+            <tr >
+                <th>USER ID</th>
+                <th>USER NAME</th>
+                <th>USER EMAIL ID</th>
+                <th>USER TYPE</th>
+                <th>ADHAR NO</th>
+                <th>PHONE NO.</th>
+                <th>NATIONALITY</th>
+
+            </thead>
+        <tbody class="text-dark">
+            <tr *ngFor='let userList of userArray'>
+                <td>{{userList.userId}}</td>
+                <td>{{userList.userName}}</td>
+                <td>{{userList.email}}</td>
+                <td>{{userList.userType}}</td>
+                <td>{{userList.adharNo}}</td>
+                <td>{{userList.phoneNo}}</td>
+                <td>{{userList.nationality}}</td>
+
+            </tr>
+    </table>
+</div>

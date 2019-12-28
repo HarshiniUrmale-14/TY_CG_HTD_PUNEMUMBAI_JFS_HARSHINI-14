@@ -1,0 +1,26 @@
+<div class="container card card-body mt-4 ">
+    <table class="table table-bordered table-hover ">
+        <thead class="bg-dark text-white">
+            <tr >
+                <th>BOOKING ID</th>
+                <th>HOTEL ID</th>
+                <th>HOTEL NAME</th>
+                <th>USER ID</th>
+                <th>CHECK IN DATE</th>
+                <th>CHECK OUT DATE</th>
+                <th>BILL</th>
+
+            </thead>
+        <tbody class="text-dark">
+            <tr *ngFor='let billList of billArray'>
+                <td>{{billList.bookingId}}</td>
+                <td>{{billList.hotelId}}</td>
+                <td>{{billList.hotelName}}</td>
+                <td>{{billList.userId}}</td>
+                <td>{{billList.checkinDate}}</td>
+                <td>{{billList.checkoutDate}}</td>
+                <td>{{billList.amount}}</td>
+
+            </tr>
+    </table>
+</div>

@@ -1,0 +1,7 @@
+.hotel-name:hover {
+    background:rgb(70, 68, 68);
+    font-size: 30px;
+    color: white;
+    border-radius: 15px;
+    display: inline;
+}

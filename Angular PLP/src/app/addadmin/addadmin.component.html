@@ -1,0 +1,125 @@
+<div class="col-md-5 float-right mt-3">
+    <form #registerForm='ngForm' (ngSubmit)='submit(registerForm,password)'
+        style="padding-top: 50px; padding-bottom: 50px;">
+        <div class=" card">
+            <div class="card-header bg-dark text-white">
+                <div>
+                    <h4>ADMIN REGISTER HERE!!!!</h4>
+                </div>
+            </div>
+            <div *ngIf='password2.touched'>
+                <h4 style="color: red;" *ngIf='registerForm.value.password !== registerForm.value.password2'>
+                    Passwords doesnt match
+                </h4>
+            </div>
+            <h4 style="color: green;" *ngIf="valid">{{valid}}</h4>
+            <h4 style="color: red;" *ngIf="inValid">{{inValid}}</h4>         
+               <div class="card-body col-md-12">
+                <div>
+                    <div class="form-group">
+                        <label for="userName">ADMIN NAME</label>
+                        <input type="userName" name="userName" required class="form-control" #userName='ngModel' ngModel
+                            placeholder="Enter admin name" class="form-control mb-3" pattern="^[a-z A-Z]{4,50}">
+                        <div *ngIf='userName.touched && userName.invalid'>
+                            <p class="alert alert-danger" *ngIf='userName.errors.required'>
+                                Input field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='userName.errors.pattern'>
+                                Input should be characters only, atleast 4 characters required
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 float-left">
+                        <div class="form-group">
+                            <label for="email">EMAIL ID</label>
+                            <input type="email" name="email" required class="form-control" #email='ngModel' ngModel
+                                email placeholder="Enter email id" class="form-control mb-3">
+                            <div *ngIf='email.touched && email.invalid'>
+                                <p class="alert alert-danger" *ngIf='email.errors.required'>
+                                    Input field is mandatory
+                                </p>
+                                <p class="alert alert-danger" *ngIf='email.errors.email'>
+                                    Input should be email only of type
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNo">MOBILE NO</label>
+                            <input type="text" name="phoneNo" required class="form-control" #phoneNo='ngModel' ngModel
+                                placeholder="Enter mobile no" class="form-control mb-3" pattern="^[6-9]\d{9}">
+                            <div *ngIf='phoneNo.touched && phoneNo.invalid'>
+                                <p class="alert alert-danger" *ngIf='phoneNo.errors.required'>
+                                    Input field is mandatory
+                                </p>
+                                <p class="alert alert-danger" *ngIf='phoneNo.errors.pattern'>
+                                    Mobile number should be starting from 6 to 9 ,it accept 10 digit only
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="adharNo">ADHAR NO</label>
+                            <input type="text" name="adharNo" required class="form-control" #adharNo='ngModel' ngModel
+                                placeholder="Enter adhar no" class="form-control mb-3" pattern="\d{12}">
+                            <div *ngIf='adharNo.touched && adharNo.invalid'>
+                                <p class="alert alert-danger" *ngIf='adharNo.errors.required'>
+                                    Input field is mandatory
+                                </p>
+                                <p class="alert alert-danger" *ngIf='adharNo.errors.pattern'>
+                                    Enter 12 digits only
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 float-left">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">NATIONALITY</label>
+                            <select class="form-control" name="nationality" #nationality='ngModel' ngModel
+                                id="exampleFormControlSelect1" required nationality>
+                                <option disabled>select</option>
+                                <option  id="2" value="indian">INDIAN</option>
+                                <option  id="3" value="american">AMERICAN</option>
+                                <div *ngIf='nationality.touched && nationality.invalid'>
+                                    <p class="alert alert-danger" *ngIf='nationality.errors.required'>
+                                        Input field is mandatory
+                                    </p>
+                                </div>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">PASSWORD</label>
+                            <input type="password" name="password" required class="form-control" #password='ngModel'
+                                ngModel placeholder="Enter password" class="form-control mb-3"
+                                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,15}$">
+                            <div *ngIf='password.touched && password.invalid'>
+                                <p class="alert alert-danger" *ngIf='password.errors.required'>
+                                    Input field is mandatory
+                                </p>
+                                <p class="alert alert-danger" *ngIf='password.errors.pattern'>
+                                    Enter 8 to 15 length password having altleast one capital letter ,one small
+                                    letter,one digit and no space
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="password2">CONFIRM PASSWORD</label>
+                                <input type="password" name="password2" required class="form-control"
+                                    #password2='ngModel' ngModel placeholder="enter password" class="form-control mb-3">
+                                <div *ngIf='password2.touched && password2.invalid'>
+                                    <p class="alert alert-danger" *ngIf='password2.errors.required'>
+                                        This field is mandatory
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <button class="btn btn-outline-primary float-right" 
+                    type='submit'>REGISTER</button>
+                <button class="btn btn-dark " type='submit'>RESET</button>
+            </div>
+        </div>
+    </form>
+</div>

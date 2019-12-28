@@ -1,0 +1,14 @@
+<div class="container mt-3 ">
+    <div class="container mt-4">
+        <div class="col-md-4 card card-body border-dark float-left" style="height:480px;width:600px;"
+            *ngFor='let room of rooms'>
+            <img [src]="room.imageUrl" class="img-fluid" alt="">
+            <p>ROOM NO :{{room.roomId}}</p>
+            <p>ROOM TYPE :{{room.roomType}}</p>
+            <p>CAPACITY :{{room.roomCapacity}}</p>
+            <p>STATUS :{{room.roomStatus}}</p>
+            <p>RENT :{{room.roomRent}}</p>
+            <button type="button" class="btn btn-outline-dark" (click)='selectRoom(room)' >BOOK NOW</button>
+        </div>
+    </div>
+</div>

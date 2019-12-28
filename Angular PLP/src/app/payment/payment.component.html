@@ -1,0 +1,71 @@
+<div class="col-md-4 offset-md-4 border-primary">
+    <form #paymentForm='ngForm' (ngSubmit)="payment(paymentForm)">
+        <div class="card">
+            <div class="card-header" style="font-size: 20px;">
+                PAYMENT!
+            </div>
+            <h4 style="color: green;" *ngIf="notValid">{{notValid.description}}</h4>
+            <div class="card-body">
+                <h5 class="text-primary" *ngIf='totalBill'>Total Bill is {{totalBill.bill | currency : 'INR'}}</h5>
+                <label for="modeOfPayment">MODE OF PAYMENT</label>
+                <select class="form-control" name="modeOfPayment" #modeOfPayment='ngModel' ngModel placeholder="Select mode of payment" required 
+                    id="paymentMode">
+                    <option disabled>select</option>
+                    <option value="credit card">CREDIT CARD</option>
+                    <option value="debit card">DEBIT CARD</option>
+                    <option value="cash">CASH PAYMENT</option>
+                </select>
+                <div *ngIf='modeOfPayment.value !== "cash"'>
+                    <div class="form-group">
+                        <label for="cardNumber">CARD NUMBER</label>
+                        <input type="text" name="cardNumber" required class="form-control" placeholder="Enter card holder name" #cardNumber='ngModel' ngModel placeholder="Enter card number"
+                            pattern="^[0-9]\d{15}">
+                        <div *ngIf='cardNumber.touched && cardNumber.invalid'>
+                            <p class="alert alert-danger" *ngIf='cardNumber.errors.required'>
+                                This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='cardNumber.errors.pattern'>
+                                Enter 16 digits only
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardName">NAME ON CARD</label>
+                        <input type="text" name="cardName" required class="form-control" pattern="^[a-z A-Z]{4,50}" placeholder="Enter name on card"
+                            #cardName='ngModel' ngModel>
+                        <div *ngIf='cardName.touched && cardName.invalid'>
+                            <p class="alert alert-danger" *ngIf='cardName.errors.required'>
+                                This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='cardName.errors.pattern'>
+                                Input should be characters only, atleast 4 characters required
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" name="cvv" required class="form-control" pattern="[0-9]{3}" #cvv='ngModel' placeholder="Enter cvv"
+                            ngModel>
+                        <div *ngIf='cvv.touched && cvv.invalid'>
+                            <p class="alert alert-danger" *ngIf='cvv.errors.required'>
+                                This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='cvv.errors.pattern'>
+                                Enter 3 digits only
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="expiryDate">EXPIRY DATE</label>
+                        <input type="date" name="expiryDate" required class="form-control"  [min]="todaysDate">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-outline-dark" type='reset'>RESET</button>
+                <button class="btn btn-outline-primary float-right" type='submit'
+                    [disabled]='paymentForm.invalid'>SUBMIT</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,12 @@
+<div class="col-md-4 offset-md-4 mt-3">
+    <input type="search" name="search" id="search" [(ngModel)]='search' class="form-control mb-3" placeholder="Search by City...">
+</div>
+<div class="col-md-3 card card-body float-left" style="height:420px;"
+    *ngFor='let hotel of hotelService.hotels | searchByLocation : search'>
+    <p class="text-center hotel-name">{{hotel.hotelName | titlecase}}</p>
+    <img [src]="hotel.imageUrl" class="img-fluid" style="height: 200px;width: 300px;">
+    <P> LOCATION:{{hotel.location | titlecase}}</P>
+    <P> PHONE NO:{{hotel.phoneNo}}</P>
+    <button (click)="hotelService.getRoomListOfHotel(hotel)" class="btn btn-outline-dark" routerLink="/bookroom"
+        type="submit">VIEW ROOMS</button>
+</div>

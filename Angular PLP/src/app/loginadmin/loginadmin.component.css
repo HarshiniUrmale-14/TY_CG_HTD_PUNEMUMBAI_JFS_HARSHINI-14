@@ -1,0 +1,42 @@
+* {box-sizing: border-box;}
+
+/* Style the input container */
+.input-container {
+  display: flex;
+  width: 200px;
+  margin-bottom: 15px;
+}
+
+/* Style the form icons */
+#input{
+  padding: 10px;
+  background: black;
+  color: white;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Style the input fields */
+#pwd {
+  width: 520px;
+  padding: 10px;
+  outline: none;
+}
+#user{
+    width: 520px;
+    padding: 10px;
+  outline: none;
+}
+
+.input-field:focus {
+  border: 1px solid dodgerblue;
+}
+
+input.ng-touched.ng-invalid{
+    border:1px solid red;
+
+}
+input.ng-touched.ng-valid {
+    border:1px solid green;
+
+}

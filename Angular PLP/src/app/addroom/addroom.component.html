@@ -1,0 +1,106 @@
+<div class="col-md-8 offset-md-2 mt-4">
+    <form #addForm='ngForm' (ngSubmit)='submit(addForm)'>
+        <div class="card card-body border-dark">
+            <div class=" card-header bg-dark text-white">
+                <h4>ADD ROOMS!!!!</h4>
+            </div>
+            <h4 style="color:green" *ngIf="valid">{{valid}}</h4>
+            <h4 style="color:red" *ngIf="invalid">{{invalid}}</h4>
+            <div class="card-body col-md-12">
+                <div class="col-md-6 float-left">
+                    <div class="form-group">
+                        <label for="hotelId"></label>
+                        <input type="hidden" name="hotelId" #hotelId='ngModel'
+                            [(ngModel)]="hotelService.selectHotel.hotelId" required class="form-control ">
+                    </div>
+                    <div class="form-group">
+                        <label for="roomId">ROOM ID</label>
+                        <input type="text" name="roomId" #roomId='ngModel' ngModel required class="form-control "
+                            pattern="(?=.*[1-9]).{3,4}">
+                        <div *ngIf='roomId.touched && roomId.invalid'>
+                            <p class="alert alert-danger" *ngIf='roomId.errors.required'> This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='roomId.errors.pattern'>Enter 3 or 4 digit </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomType">ROOM TYPE</label>
+                        <select class="form-control" name="roomType" #roomType='ngModel' ngModel required id="roomType">
+                            <option disabled>select</option>
+                            <option>NON AC CLASSIC (2x)</option>
+                            <option>NON AC CLASSIC (1x)</option>
+                            <option>AC CLASSIC (2x)</option>
+                            <option>AC CLASSIC (1x)</option>
+                        </select>
+                        <div *ngIf='roomType.touched && roomType.invalid'>
+                            <p class="alert alert-danger" *ngIf='roomType.errors.required'> This field is mandatory
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomCapacity">ROOM CAPACITY</label>
+                        <select class="form-control" name="roomCapacity" #roomCapacity='ngModel' ngModel required
+                            id="roomCapacity">
+                            <option disabled>select</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                        <div *ngIf='roomCapacity.touched && roomCapacity.invalid'>
+                            <p class="alert alert-danger" *ngIf='roomCapacity.errors.required'> This field is
+                                mandatory
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 float-left">
+                    <div class="form-group">
+                        <label for="hotelName"></label>
+                        <input type="hidden" name="hotelName" #hotelName='ngModel'
+                            [(ngModel)]="hotelService.selectHotel.hotelName" required class="form-control ">
+                    </div>
+                    <div class="form-group">
+                        <label for="roomStatus">ROOM STATUS</label>
+                        <select class="form-control" name="roomStatus" #roomStatus='ngModel' ngModel id="roomStatus">
+                            <option disabled>select</option>
+                            <option>AVAILABLE</option>
+                            <option>NOT AVAILABLE</option>
+                        </select>
+                        <div *ngIf='roomStatus.touched && roomStatus.invalid'>
+                            <p class="alert alert-danger" *ngIf='roomStatus.errors.required'> This field is
+                                mandatory
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomRent">ROOM RENT</label>
+                        <input type="text" name="roomRent" #roomRent='ngModel' ngModel required pattern="^\d{3,4}$"
+                            class="form-control">
+                        <div *ngIf='roomRent.touched && roomRent.invalid'>
+                            <p class="alert alert-danger" *ngIf='roomRent.errors.required'>This field is
+                                mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='roomRent.errors.pattern'> Enter 3 or 4 digit only</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">IMAGE URL</label>
+                        <input type="url" name="imageUrl" #imageUrl='ngModel' ngModel required noSpace
+                            class="form-control" pattern="(?=.*[a-zA-Z]).(?=.*[a-zA-Z0-9]).{10,}">
+                        <div *ngIf='imageUrl.touched && imageUrl.invalid'>
+                            <p class="alert alert-danger" *ngIf='imageUrl.errors.required'>This field
+                                is mandatory</p>
+                            <p class="alert alert-danger" *ngIf='imageUrl.errors.pattern'>
+                                It requires atleast 10 characters,it accept digit also </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-dark">
+                <button class="btn btn-outline-primary bg-primary active " type='reset'>RESET</button>
+                <button class="btn btn-outline-primary bg-primary active float-right" [disabled]='addForm.invalid'
+                    type='submit'>SUBMIT</button>
+            </div>
+        </div>
+    </form>
+</div>

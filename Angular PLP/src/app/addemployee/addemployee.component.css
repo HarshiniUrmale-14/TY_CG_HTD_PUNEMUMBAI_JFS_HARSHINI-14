@@ -1,0 +1,14 @@
+
+
+.input-field:focus {
+  border: 1px solid dodgerblue;
+}
+
+input.ng-touched.ng-invalid{
+    border:1px solid red;
+
+}
+input.ng-touched.ng-valid {
+    border:1px solid green;
+
+}

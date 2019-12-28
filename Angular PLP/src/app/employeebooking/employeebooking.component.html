@@ -1,0 +1,74 @@
+<div class="col-md-5 offset-4 mt-3">
+    <form #bookHotel="ngForm" (ngSubmit)="updateForm(bookHotel)">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h4>BOOKING DETAILS</h4>
+            </div>
+            <div class="card-body">
+                <h4 style="color:red;" *ngIf='notValid'>{{notValid.description}}</h4>
+                <input type="hidden" name="hotelId" #hotelId="ngModel"
+                [(ngModel)]="hotelService.selectedRoom.hotelId" required>
+                <div class="form-group">
+                    <label for="hotelName">HOTEL NAME</label>
+                    <input type="text" name="hotelName" class="form-control " #hotelName="ngModel"
+                        [(ngModel)]="hotelService.selectedRoom.hotelName" required pattern="(?=.*[a-zA-Z]).{5,20}">
+                    <div *ngIf='hotelName.touched && hotelName.invalid'>
+                        <p class="alert alert-danger" *ngIf='hotelName.errors.required'> field
+                            is
+                            mandatory</p>
+                        <p class="alert alert-danger" *ngIf='hotelName.errors.pattern'> only
+                            minlength 5 and maxlength 20 character only</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="roomId">ROOM ID</label>
+                    <input type="number" name="roomId" class="form-control " #bookId="ngModel"
+                        [(ngModel)]="hotelService.selectedRoom.roomId" required>
+                </div>
+                <div class=" form-group">
+                    <label for="userId">USER ID</label>
+                    <input type="text" name="userId" class="form-control " #userId="ngModel"
+                        (ngModel)="selectedHotel.userId" required pattern="^[0-9]\d{0,}">
+                    <div *ngIf='userId.touched && userId.invalid'>
+                        <p class="alert alert-danger" *ngIf='userId.errors.required'>
+                            This Field is mandatory
+                        </p>
+                        <p class="alert alert-danger" *ngIf='userId.errors.pattern'>
+                            User Id should be digits only
+                        </p>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="userName">USER NAME</label>
+                    <input type="userName" name="userName" class="form-control " #userName="ngModel"
+                        (ngModel)="selectedHotel.userName" pattern="^[a-z A-Z]{4,50}" required>
+                    <div *ngIf='userName.touched && userName.invalid'>
+                        <p class="alert alert-danger" *ngIf='userName.errors.required'>
+                            Input field is mandatory
+                        </p>
+                        <p class="alert alert-danger" *ngIf='userName.errors.pattern'>
+                            Input should be character only
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="checkinDate">CHECK IN DATE</label>
+                    <input type="date" name="checkinDate" class="form-control " #checkinDate="ngModel" ngModel
+                        [min]="todaysDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkoutDate">CHECK OUT DATE</label>
+                    <input type="date" name="checkoutDate" class="form-control " #checkoutDate="ngModel" ngModel
+                        [min]="checkinDate.value" required>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <button class="btn btn-outline-dark " type='reset'>RESET</button>
+                <button class="btn btn-outline-primary float-right" [disabled]='bookHotel.invalid'
+                    type='submit'>SUBMIT</button>
+            </div>
+        </div>
+
+    </form>
+</div>

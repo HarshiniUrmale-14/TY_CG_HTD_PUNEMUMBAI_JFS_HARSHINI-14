@@ -1,0 +1,46 @@
+<div class="col-md-5 float-right mt-5">
+    <form #loginForm='ngForm' (ngSubmit)='login(loginForm)'>
+        <div class="card">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4>LOGIN HERE!!!!</h4>
+                </div>
+                <h4 style="color:red;" *ngIf='inValid'>{{inValid}}</h4>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="email">EMAILID</label>
+                        <input type="email" name="email" required class="form-control" #email='ngModel' ngModel email
+                            placeholder="Enter email id" class="form-control mb-3">
+                        <div *ngIf='email.touched && email.invalid '>
+                            <p class="alert alert-danger" *ngIf='email.errors.required'>
+                                This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='email.errors.email'>
+                                Enter only email
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">PASSWORD</label>
+                        <input type="password" name="password" required class="form-control" #password='ngModel' ngModel
+                            placeholder="Enter password" class="form-control mb-3"
+                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,15}$">
+                        <div *ngIf='password.touched && password.invalid'>
+                            <p class="alert alert-danger" *ngIf='password.errors.required'>
+                                This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='password.errors.pattern'>
+                                Enter 8 to 15 length password having altleast one capital letter ,one small letter
+                                and one digit
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-outline-dark float-right"
+                        type='submit'>LOGIN</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

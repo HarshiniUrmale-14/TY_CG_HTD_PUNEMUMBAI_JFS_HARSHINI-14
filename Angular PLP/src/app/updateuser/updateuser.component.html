@@ -1,0 +1,101 @@
+<div class="col-md-8 offset-md-2 mt-4">
+    <form #updateForm='ngForm' (ngSubmit)='updateProfile(updateForm)'>
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h4>UPDATE PROFILE!!!!</h4>
+            </div>
+            <h4 style="color: green;" *ngIf="isUpdate">{{isUpdate.description}}</h4>
+            <div class="card-body col-md-12">
+                <div class="col-md-6 float-left">
+                    <div class="form-group">
+                        <label for="userName"> USER NAME</label>
+                        <input type="text" name="userName" #userName='ngModel' [(ngModel)]=user.userName required
+                            placeholder="enter name" class="form-control" pattern="^[a-z A-Z]{4,50}">
+                        <div *ngIf='userName.touched && userName.invalid'>
+                            <p class="alert alert-danger" *ngIf='userName.errors.required'>
+                                Input field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='userName.errors.pattern'>
+                                Input should be character only
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">EMAIL ID</label>
+                        <input type="email" id="email" name="email" #email='ngModel' [(ngModel)]=user.email required
+                            placeholder="enter name" class="form-control">
+                        <div *ngIf='email.touched && email.invalid'>
+                            <p class="alert alert-danger" *ngIf='email.errors.required'>
+                                Input field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='email.errors.email'>
+                                Input should be email only
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNo">PHONE NO</label>
+                        <input type="text" id="phoneNo" name="phoneNo" #phoneNo='ngModel' [(ngModel)]=user.phoneNo
+                            required placeholder="enter mobile no" class="form-control" pattern="^[6-9]\d{9}">
+                        <div *ngIf='phoneNo.touched && phoneNo.invalid'>
+                            <p class="alert alert-danger" *ngIf='phoneNo.errors.required'>
+                                This Field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='phoneNo.errors.pattern'>
+                                Mobile number should be starting from 6 to 9
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 float-left">
+                    <div class="form-group">
+                        <label for="adharNo">ADHAR NO</label>
+                        <input type="text" name="adharNo" #adharNo='ngModel' [(ngModel)]=user.adharNo required address
+                            placeholder="enter address" class="form-control">
+                        <div *ngIf='adharNo.touched && adharNo.invalid'>
+                            <p class="alert alert-danger" *ngIf='adharNo.errors.required'>
+                                This Field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='adharNo.errors.pattern'>
+                                Enter adhar no with 12 digits only
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">NATIONALITY</label>
+                        <select type="text" class="form-control" name="nationality" #nationality='ngModel'
+                            [(ngModel)]=user.nationality id="exampleFormControlSelect1">
+                            <option disabled>select</option>
+                            <option>INDIAN</option>
+                            <option>AMERICAN</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="password">PASSWORD</label>
+                        <input type="password" id="password" name="password" #password='ngModel'
+                            ngModel required placeholder="enter password" class="form-control"
+                            pattern="(?=.*[a-z A-Z])(?=.*[0-9]).{8,15}">
+                        <div *ngIf='password.touched && password.invalid'>
+                            <p class="alert alert-danger" *ngIf='password.errors.required'>
+                                This field is mandatory
+                            </p>
+                            <p class="alert alert-danger" *ngIf='password.errors.pattern'>
+                                Enter 8 to 15 length password having altleast one capital letter ,one small letter
+                                and one digit
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light">
+                <button class="btn btn-outline-dark float-right" 
+                    type='submit'>SUBMIT</button>
+            </div>
+
+        </div>
+    </form>
+</div>

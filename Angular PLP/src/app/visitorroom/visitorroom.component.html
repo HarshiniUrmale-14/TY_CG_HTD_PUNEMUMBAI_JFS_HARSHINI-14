@@ -1,0 +1,10 @@
+<div class="col-md-3 card card-body float-left mt-5"  style="height:440px;"
+    *ngFor='let room of hotelService.hotelRoomDetails'>
+    <img [src]="room.imageUrl" class="img-fluid" style="height:300px;width:250px;">
+    <p> ROOM NO :{{room.roomId}}</p>
+    <p> ROOM TYPE :{{room.roomType}}</p>
+    <p> ROOM STATUS :{{room.roomStatus}}</p>
+    <p> Rs. {{room.roomRent}}</p>
+    <button style="height: 50px;" class="btn btn-outline-dark" (click)='selectRoom(room)'>BOOK ROOM</button>
+</div>
+
